@@ -1,0 +1,18 @@
+
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(git)
+
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
+
+# Your aliases
+alias gs='git status'
+alias ga='git add .'
+# add more here...
+
+##### Local overrides & secrets (NOT in git) #####
+
+# This is where you keep machine-specific stuff, tokens, custom PATHs, etc.
+if [ -f "$HOME/.zshrc.local" ]; then
+  source "$HOME/.zshrc.local"
+fi
