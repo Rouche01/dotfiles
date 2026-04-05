@@ -1,3 +1,4 @@
 .zshrc.local
 .env
 .secrets*
+aliases.local.zsh
