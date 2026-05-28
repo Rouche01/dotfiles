@@ -30,6 +30,14 @@ plugins=(
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Flutter SDK
+export PATH="$HOME/development/flutter/bin:$PATH"
+
+export FLUTTER_ROOT="/Users/richardemate/development/flutter"
+
+# JDK version
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+
 ##### Local overrides & secrets (NOT in git) #####
 
 # This is where you keep machine-specific stuff, tokens, custom PATHs, etc.
