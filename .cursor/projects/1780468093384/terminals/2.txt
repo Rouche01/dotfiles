@@ -1,5 +1,0 @@
----
-pid: 25103
-cwd: /Users/richardemate
----
- ~                                                            ok | at 08:28:21 

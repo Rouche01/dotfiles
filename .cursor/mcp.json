@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "perplexity-coding": {
+      "command": "uvx",
+      "args": ["perplexity-mcp"],
+      "env": {
+        "PERPLEXITY_API_KEY": "${env:PERPLEXITY_API_KEY}",
+        "PERPLEXITY_MODEL": "sonar-reasoning-pro",
+        "PERPLEXITY_PRESET": "pro-search",
+        "PERPLEXITY_INSTRUCTIONS": "You are a coding assistant. Always prefer providing working code examples, explanations, and refactors over long theoretical explanations. When asked to write code, include types, comments, and tiny tests when helpful."
+
+      }
+    },
+    "perplexity-search": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["perplexity-mcp"],
+      "env": {
+        "PERPLEXITY_API_KEY": "${env:PERPLEXITY_API_KEY}",
+        "PERPLEXITY_MODEL": "sonar",
+        "PERPLEXITY_TOOLS": "web_search"
+      }
+    },
+    "ollama-fast": {
+      "command": "uvx",
+      "args": ["mcp-ollama"],
+      "env": {
+        "OLLAMA_BASE_URL": "http://localhost:11434",
+        "OLLAMA_MODEL": "qwen2.5-coder:14b"
+      }
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "${env:CONTEXT7_API_KEY}"
+      }
+    }
+  }
+}
+
