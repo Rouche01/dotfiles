@@ -1,0 +1,37 @@
+---
+description: Use perplexity-coding MCP for coding help with web-backed research (sonar-reasoning-pro)
+alwaysApply: false
+---
+
+# plx-code (perplexity-coding)
+
+When this rule is active, use the **perplexity-coding** MCP server for coding questions, API usage, libraries, and up-to-date technical guidance.
+
+## MCP setup
+
+- Server: `perplexity-coding` (`perplexity-mcp` via `uvx`)
+- Tool: `perplexity_search_web`
+- Model: `sonar-reasoning-pro`
+- Preset: `pro-search`
+
+## When to use
+
+- Implementing or debugging code
+- Framework/library docs and breaking changes
+- Architecture or pattern research that benefits from current web sources
+
+## Workflow
+
+1. Call `perplexity_search_web` with a focused query (include language, version, and error text when relevant).
+2. Apply findings to this project's stack and existing code style.
+3. Prefer working examples with types; add tests when the user asks.
+
+## When not to use
+
+- Purely local refactors with no external docs needed — use the codebase directly.
+- If the user explicitly requests **ollama-fast** or local-only Ollama — switch to `@ollama-fast` instead.
+
+## Requirements
+
+- `PERPLEXITY_API_KEY` must be set in the environment.
+- If MCP fails, tell the user to check the key and that `perplexity-coding` is enabled in Cursor MCP settings.

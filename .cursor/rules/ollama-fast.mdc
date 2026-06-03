@@ -1,0 +1,31 @@
+---
+description: Use local Ollama via ollama-fast MCP (qwen2.5-coder:14b) for coding tasks
+alwaysApply: false
+---
+
+# ollama-fast
+
+When this rule is active, use the **ollama-fast** MCP server for implementation help, code generation, and reviews.
+
+## MCP setup
+
+- Server: `ollama-fast` (`mcp-ollama` via `uvx`)
+- Base URL: `http://localhost:11434`
+- Default model: `qwen2.5-coder:14b`
+
+## Workflow
+
+1. Ensure Ollama is running (`ollama serve`).
+2. Use MCP tools: `list_models`, `show_model`, `ask_model`.
+3. For `ask_model`, pass `model: "qwen2.5-coder:14b"` unless the user specifies another local model.
+4. Prefer ollama-fast for code logic; use perplexity-coding only when the user asks for web/docs research.
+
+## Code quality
+
+- Match the project's language, style, and existing patterns.
+- Prefer Unicode-safe string handling (`[...str]` over `split('')` for emoji).
+- Include tests when the user asks for them (e.g. Vitest).
+
+## If Ollama is unavailable
+
+Tell the user to run `ollama serve` and `ollama pull qwen2.5-coder:14b`, then retry.

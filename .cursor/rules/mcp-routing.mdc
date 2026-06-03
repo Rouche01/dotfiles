@@ -1,0 +1,81 @@
+---
+description: Route tasks to the right MCP; report which MCPs were used each turn
+alwaysApply: true
+---
+
+# MCP routing
+
+Use the configured MCP servers by task type. Do not call every MCP on every message.
+
+**Enabled MCPs:** `context7`, `ollama-fast`, `perplexity-coding`, `perplexity-search`
+
+## MCP visibility (required)
+
+At the **start** of each Agent response (before the main answer):
+
+**MCPs used:** `none` | `context7` | `ollama-fast` | `perplexity-coding` | `perplexity-search` (comma-separated if multiple)
+
+**Why:** One line explaining the routing choice.
+
+- List only MCPs **actually called** this turn.
+- If repo tools only: `MCPs used: none`.
+- On **escalation**, name both tiers and why (e.g. ollama-fast → perplexity-coding).
+- On **failure**, add **Failed:** `server` — reason — **Fallback:** `server`.
+
+## Quick routing
+
+| Intent | MCP |
+|--------|-----|
+| Official library/framework docs | context7 → @Docs → perplexity-search |
+| Simple coding (single file, small scope) | ollama-fast |
+| Complex coding (multi-file, hard bugs, new deps) | perplexity-coding |
+| General web research (not lib docs) | perplexity-search |
+| Codebase-only edits | No MCP — use repo tools |
+
+## Documentation & research
+
+For **API reference, hooks, config, versions** of a known library:
+
+1. **context7** — `resolve-library-id` then `query-docs`
+2. **Cursor @Docs** — if indexed or @Docs matches
+3. **perplexity-search** — only when context7/@Docs cannot answer, or general web research
+
+Do **not** use perplexity-search for lib API questions if context7 or @Docs can answer.
+
+**perplexity-search** (`@plx-search`): comparisons, opinions, news, fallback after docs fail.
+
+## ollama-fast (default for simple coding)
+
+Use first for **low-complexity** work. User does **not** need to say “local”.
+
+**Prefer when:** single file, ~&lt; 50 lines, one function/util/test, straightforward TS/JS, clear scope.
+
+**Tools:** `list_models`, `show_model`, `ask_model` — default `qwen2.5-coder:14b` @ `http://localhost:11434`
+
+**Requires:** `ollama serve` + model pulled. On failure → report **Failed: ollama-fast** and offer perplexity-coding.
+
+## perplexity-coding (`@plx-code`)
+
+**Prefer when:** multi-file, new deps/infra, hard bugs, security/performance/architecture, weak ollama output (after one retry).
+
+**Tool:** `perplexity_search_web` · **Model:** `sonar-reasoning-pro` · preset `pro-search`  
+**Requires:** `PERPLEXITY_API_KEY`
+
+## perplexity-search (`@plx-search`)
+
+Research **only** — not primary for large codegen unless asked.
+
+**Tool:** `perplexity_search_web` · **Model:** `sonar` · web search only  
+**Requires:** `PERPLEXITY_API_KEY`
+
+## Manual overrides
+
+Override defaults: `@plx-code`, `@plx-search`, `@ollama-fast`, explicit “use context7”.
+
+## Complexity checklist
+
+**2+ heavy signals → perplexity-coding** (skip ollama-first): 2+ files, new packages, context7 failed + needs web, auth/security/prod, large “architecture” asks.
+
+## On failure
+
+Report **Failed:** server + fix (API key, `ollama serve`, context7 library ID). Escalate one tier with user consent or if blocked.

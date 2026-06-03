@@ -1,0 +1,38 @@
+---
+description: Use perplexity-search MCP for web research (sonar + web_search)
+alwaysApply: false
+---
+
+# plx-search (perplexity-search)
+
+When this rule is active, use the **perplexity-search** MCP server for lookups, comparisons, and current information—not for writing large code blocks unless the user asks.
+
+## MCP setup
+
+- Server: `perplexity-search` (`perplexity-mcp` via `uvx`)
+- Tool: `perplexity_search_web`
+- Model: `sonar`
+- Tools enabled: `web_search` only
+
+## When to use
+
+- Documentation, release notes, and API changes
+- “What is…”, “how does…”, “best way to…” research questions
+- Verifying facts before recommending libraries or patterns
+
+## Workflow
+
+1. Call `perplexity_search_web` with a specific query (include product name, version, year when relevant).
+2. Summarize findings clearly; cite sources when the tool returns them.
+3. Prefer concise answers; link to official docs when possible.
+
+## When not to use
+
+- **Implementation-heavy tasks** — use `@plx-code` / **perplexity-coding** instead.
+- **Local/offline coding** — use `@ollama-fast` if the user wants local Ollama only.
+- Questions answerable from the open codebase alone.
+
+## Requirements
+
+- `PERPLEXITY_API_KEY` must be set.
+- If MCP fails, ask the user to verify the key and that `perplexity-search` is enabled in Cursor MCP settings.

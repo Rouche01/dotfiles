@@ -1,0 +1,35 @@
+{
+  "name": "ask_model",
+  "description": "Ask a question to a specific Ollama model\n\nArgs:\n    model: Name of the model to use (e.g., 'llama2')\n    question: The question to ask the model\n",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "model": {
+        "title": "Model",
+        "type": "string"
+      },
+      "question": {
+        "title": "Question",
+        "type": "string"
+      }
+    },
+    "required": [
+      "model",
+      "question"
+    ],
+    "title": "ask_modelArguments"
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "result": {
+        "title": "Result",
+        "type": "string"
+      }
+    },
+    "required": [
+      "result"
+    ],
+    "title": "ask_modelOutput"
+  }
+}
