@@ -1,6 +1,7 @@
-# Ignore everything except rules and mcp.json
+# Dotfiles: only sync MCP servers + user rules
 *
 !.gitignore
+!mcp.json
 !rules/
 !rules/**
-!mcp.json
+!*cursor-chat.json
