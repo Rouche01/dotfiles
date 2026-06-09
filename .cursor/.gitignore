@@ -1,7 +1,0 @@
-# Dotfiles: only sync MCP servers + user rules
-*
-!.gitignore
-!mcp.json
-!rules/
-!rules/**
-!*cursor-chat.json
