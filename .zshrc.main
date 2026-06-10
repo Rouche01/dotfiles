@@ -38,6 +38,9 @@ export FLUTTER_ROOT="/Users/richardemate/development/flutter"
 # JDK version
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 
+# Cursor
+export PATH="/Applications/Cursor.app/Contents/Resources/app/bin:$PATH"
+
 ##### Local overrides & secrets (NOT in git) #####
 
 # This is where you keep machine-specific stuff, tokens, custom PATHs, etc.
