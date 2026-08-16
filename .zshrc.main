@@ -44,6 +44,9 @@ export PATH="/Applications/Cursor.app/Contents/Resources/app/bin:$PATH"
 # UV Python tools
 export PATH="$HOME/.local/bin:$PATH"
 
+# Lean / Lake tooling
+export PATH="$HOME/.elan/bin:$PATH"
+
 ##### Local overrides & secrets (NOT in git) #####
 
 # This is where you keep machine-specific stuff, tokens, custom PATHs, etc.
