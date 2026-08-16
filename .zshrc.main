@@ -47,6 +47,10 @@ export PATH="$HOME/.local/bin:$PATH"
 # Lean / Lake tooling
 export PATH="$HOME/.elan/bin:$PATH"
 
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/richardemate/.lmstudio/bin"
+# End of LM Studio CLI section
+
 ##### Local overrides & secrets (NOT in git) #####
 
 # This is where you keep machine-specific stuff, tokens, custom PATHs, etc.
